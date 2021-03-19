@@ -5,13 +5,14 @@
 
 ----
 ## Features
-* Center TaskBar 
-* Animations
-* Set TaskBar Color
-* Auto Center
+* Animations(beta)
+* calculates Center of taskbar
 * Vertical orientation support
-* StartMenu Blur 
-* Start On Boot
+* Change offset of TaskBar 
+* Change taskbar style
+* Change taskbar color 
+* Change StartMenu style
+* Pick to Start On Boot
 
 
 ## Contributing
