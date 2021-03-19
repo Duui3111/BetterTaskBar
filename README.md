@@ -11,6 +11,7 @@
 * Auto Center
 * Vertical orientation support
 * StartMenu Blur 
+* Start On Boot
 
 
 ## Contributing
