@@ -8,10 +8,8 @@
 * Animations(beta)
 * calculates Center of taskbar
 * Vertical orientation support
-* Change offset of TaskBar 
-* Change taskbar style
-* Change taskbar color 
-* Change StartMenu style
+* Change Taskbar Style, Color and Offset
+* Change StartMeu Style 
 * Pick to Start On Boot
 
 
