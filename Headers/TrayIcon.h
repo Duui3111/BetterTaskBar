@@ -48,7 +48,7 @@ void AddTrayIcon(HWND hWnd, UINT uID, UINT uCallbackMsg, UINT uIcon) noexcept
 	nid.uID = uID;
 	nid.uFlags = NIF_ICON | NIF_MESSAGE | NIF_TIP;
 	nid.uCallbackMessage = uCallbackMsg;
-	nid.hIcon = LoadIconW(NULL, L"../icon.ico");
+	nid.hIcon = static_cast<HICON>(LoadImage(NULL, "icon.ico", IMAGE_ICON, 0, 0, LR_LOADFROMFILE | LR_DEFAULTSIZE | LR_SHARED));
 	strncpy_s(nid.szTip, "Tool Tip", 128);
 	Shell_NotifyIconA(NIM_ADD, &nid);
 }

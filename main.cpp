@@ -170,7 +170,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 int WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int)
 {
-	WNDCLASSW ws { NULL, WndProc, NULL, NULL, hInstance, LoadIconW(NULL, L"icon.ico"), NULL, CreateSolidBrush(RGB(240, 240, 240)), NULL, L"BetterTaskBarWClass" };
+	WNDCLASSW ws { NULL, WndProc, NULL, NULL, hInstance, (HICON)LoadImage(NULL, "icon.ico", IMAGE_ICON, 0, 0, LR_LOADFROMFILE | LR_DEFAULTSIZE | LR_SHARED), NULL, CreateSolidBrush(RGB(240, 240, 240)), NULL, L"BetterTaskBarWClass" };
 	RegisterClassW(&ws);
 	HWND win = CreateWindowExW(WS_EX_LAYERED, ws.lpszClassName, L"TaskBar Congregation", WS_SYSMENU | WS_VISIBLE, 500, 150, 550, 470, NULL, NULL, NULL, NULL);
 	SetLayeredWindowAttributes(win, RGB(0, 0, 1), 200, 2);
