@@ -1,6 +1,6 @@
 <h3 align="center">Better TaskBar</h3>
     <p align="center">It is a Tool to make Windows Taskbar Look Better</p>
-    <img src=""https://github.com/Duui3111/BetterTaskBar/blob/main/assets/taskbar.gif />
+    <img src="https://raw.githubusercontent.com/Duui3111/BetterTaskBar/main/assets/taskbar.gif" />
 <br/>
 
 ----
