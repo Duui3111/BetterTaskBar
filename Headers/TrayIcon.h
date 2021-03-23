@@ -33,22 +33,6 @@ BOOL ShowPopupMenu(HWND hWnd, bool checked) noexcept
 	return 0;
 }
 
-HICON SetIcons(HWND hwnd, const WCHAR* iconpath) noexcept 
-{
-	HANDLE hIcon = LoadImage(0, iconpath, IMAGE_ICON, 0, 0, LR_DEFAULTSIZE | LR_LOADFROMFILE | LR_SHARED);
-
-	if (hIcon) 
-	{
-		SendMessage(hwnd, WM_SETICON, ICON_SMALL, AutoCast(hIcon).ToAuto<LPARAM>());
-		SendMessage(hwnd, WM_SETICON, ICON_BIG, AutoCast(hIcon).ToAuto<LPARAM>());
-
-		SendMessage(GetWindow(hwnd, GW_OWNER), WM_SETICON, ICON_SMALL, AutoCast(hIcon).ToAuto<LPARAM>());
-		SendMessage(GetWindow(hwnd, GW_OWNER), WM_SETICON, ICON_BIG, AutoCast(hIcon).ToAuto<LPARAM>());
-	}
-
-	return AutoCast(hIcon);
-}
-
 void RemoveTrayIcon(HWND hWnd, UINT uID) noexcept
 {
 	NOTIFYICONDATA nid;
