@@ -246,33 +246,3 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPSTR, _In
 
 	return AutoCast<WPARAM>(msg.wParam).ToAuto<int>();
 }
-
-
-
-
-
-
-
-//int main() noexcept
-//{
-//	WNDCLASSW ws{ NULL, WndProc, NULL, NULL, GetModuleHandle(NULL), LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(101)), NULL, CreateSolidBrush(RGB(240, 240, 240)), NULL, L"BetterTaskBarWClass" };
-//	RegisterClassW(&ws);
-//	HWND win = CreateWindowExW(WS_EX_LAYERED, ws.lpszClassName, L"TaskBar Congregation", WS_SYSMENU | WS_VISIBLE, 500, 150, 550, 500, NULL, NULL, NULL, NULL);
-//	SetLayeredWindowAttributes(win, RGB(0, 0, 1), 200, 2);
-//
-//	SetProcessDpiAwareness(PROCESS_SYSTEM_DPI_AWARE);
-//
-//	BOOL Ret;
-//	MSG msg;
-//
-//	while ((Ret = GetMessageW(&msg, 0, 0, 0)))
-//	{
-//		if (Ret == -1)
-//			return -1;
-//
-//		TranslateMessage(&msg);
-//		DispatchMessageW(&msg);
-//	}
-//
-//	return AutoCast<WPARAM>(msg.wParam).ToAuto<int>();
-//}
