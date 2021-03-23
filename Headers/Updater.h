@@ -105,7 +105,7 @@ std::string DownloadBytes(std::string szUrl)
 
 std::string removeSpecialCharacter(std::string s)
 {
-	for (int i = 0; i < s.size(); i++)
+	for (size_t i = 0; i < s.size(); i++)
 	{
 		if (s.at(i) < '0' || s.at(i) > '9')
 		{

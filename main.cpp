@@ -4,7 +4,11 @@
 #include "IniFile.h"
 #include "registry.h"
 #include "AutoCast.h"
+
+#include <Commctrl.h>
+#include <ShellScalingAPI.h>
 #include <iostream>
+#include <thread>
 
 #pragma comment(linker, "/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' \
  processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
@@ -52,31 +56,31 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
 		AddTrayIcon(hwnd, 1, WM_APP, 0);
 
-		HWND h1 = CreateWindow(TEXT("STATIC"), TEXT("TASKBAR STYLE"), WS_CHILD | WS_VISIBLE, 20, 30, 300, 25, hwnd, (HMENU)9, NULL, NULL);
+		HWND h1 = CreateWindow(TEXT("STATIC"), TEXT("TASKBAR STYLE"), WS_CHILD | WS_VISIBLE, 20, 30, 300, 25, hwnd, NULL, NULL, NULL);
 		HWND h2 = CreateWindow(TEXT("button"), TEXT("None"), WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON | WS_GROUP, 20, 70, 200, 30, hwnd, (HMENU)5, NULL, NULL);
 		HWND h3 = CreateWindow(TEXT("button"), TEXT("Gradient"), WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON, 20, 100, 200, 30, hwnd, (HMENU)1, NULL, NULL);
 		HWND h4 = CreateWindow(TEXT("button"), TEXT("Transparent"), WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON, 20, 140, 230, 30, hwnd, (HMENU)2, NULL, NULL);
 		HWND h5 = CreateWindow(TEXT("button"), TEXT("Blur"), WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON, 20, 180, 200, 30, hwnd, (HMENU)3, NULL, NULL);
 		HWND h6 = CreateWindow(TEXT("button"), TEXT("Acrylic"), WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON, 20, 210, 200, 30, hwnd, (HMENU)6, NULL, NULL);
 		
-		HWND h100 = CreateWindow(TEXT("STATIC"), TEXT("STARTMENU"), WS_CHILD | WS_VISIBLE, 20, 270, 320, 30, hwnd, (HMENU)100, NULL, NULL);
+		HWND h100 = CreateWindow(TEXT("STATIC"), TEXT("STARTMENU"), WS_CHILD | WS_VISIBLE, 20, 270, 320, 30, hwnd, NULL, NULL, NULL);
 		HWND h101 = CreateWindow(TEXT("button"), TEXT("None"), WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON | WS_GROUP, 20, 310, 200, 30, hwnd, (HMENU)102, NULL, NULL);
 		HWND h103 = CreateWindow(TEXT("button"), TEXT("Blur"), WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON, 20, 350, 200, 30, hwnd, (HMENU)103, NULL, NULL);
 
-		HWND h11 = CreateWindow(TEXT("STATIC"), TEXT("TASKBAR POSITION"), WS_CHILD | WS_VISIBLE, 270, 30, 300, 25, hwnd, (HMENU)14, NULL, NULL);
-		CreateWindow(TEXT("STATIC"), TEXT("OFFSET"), WS_CHILD | WS_VISIBLE, 270, 85, 300, 25, hwnd, (HMENU)10, NULL, NULL);
-		h9 = CreateWindowEx(WS_EX_CLIENTEDGE, TEXT("EDIT"), TEXT("0"), WS_CHILD | WS_VISIBLE, 400, 80, 80, 25, hwnd, AutoCast(12), NULL, NULL);
-		CreateWindow(TEXT("button"), TEXT("SUBMIT"), WS_CHILD | WS_VISIBLE, 270, 120, 250, 30, hwnd, (HMENU)32, NULL, NULL);
-		h40 = CreateWindow(TEXT("button"), TEXT("RESET"), WS_CHILD | WS_VISIBLE, 270, 160, 250, 30, hwnd, (HMENU)40, NULL, NULL);
+		HWND h11 = CreateWindow(TEXT("STATIC"), TEXT("TASKBAR POSITION"), WS_CHILD | WS_VISIBLE, 270, 30, 300, 25, hwnd, NULL, NULL, NULL);
+		CreateWindow(TEXT("STATIC"), TEXT("OFFSET"), WS_CHILD | WS_VISIBLE, 270, 85, 300, 25, hwnd, NULL, NULL, NULL);
+		h9 = CreateWindowEx(WS_EX_CLIENTEDGE, TEXT("EDIT"), TEXT("0"), WS_CHILD | WS_VISIBLE, 400, 80, 80, 25, hwnd, AutoCast<int>(12), NULL, NULL);
 
-		HWND h14 = CreateWindow(TEXT("STATIC"), TEXT("TASKBAR COLOR"), WS_CHILD | WS_VISIBLE, 270, 220, 300, 25, hwnd, (HMENU)17, NULL, NULL);
-		CreateWindow(TEXT("STATIC"), TEXT("RED"), WS_CHILD | WS_VISIBLE, 270, 270, 300, 25, hwnd, (HMENU)18, NULL, NULL);
-		h16 = CreateWindowEx(WS_EX_CLIENTEDGE, TEXT("EDIT"), TEXT("0"), WS_CHILD | WS_VISIBLE, 400, 265, 80, 25, hwnd, AutoCast(19), NULL, NULL);
-		CreateWindow(TEXT("STATIC"), TEXT("GREEN"), WS_CHILD | WS_VISIBLE, 270, 300, 300, 25, hwnd, (HMENU)18, NULL, NULL);
-		h18 = CreateWindowEx(WS_EX_CLIENTEDGE, TEXT("EDIT"), TEXT("0"), WS_CHILD | WS_VISIBLE, 400, 300, 80, 25, hwnd, AutoCast(20), NULL, NULL);
-		CreateWindow(TEXT("STATIC"), TEXT("BLUE"), WS_CHILD | WS_VISIBLE, 270, 335, 300, 25, hwnd, (HMENU)18, NULL, NULL);
-		h20 = CreateWindowEx(WS_EX_CLIENTEDGE, TEXT("EDIT"), TEXT("0"), WS_CHILD | WS_VISIBLE, 400, 335, 80, 25, hwnd, AutoCast(21), NULL, NULL);
-		CreateWindow(TEXT("button"), TEXT("SUBMIT"), WS_CHILD | WS_VISIBLE, 270, 370, 250, 35, hwnd, (HMENU)22, NULL, NULL);
+		HWND h14 = CreateWindow(TEXT("STATIC"), TEXT("TASKBAR COLOR"), WS_CHILD | WS_VISIBLE, 270, 160, 300, 25, hwnd, NULL, NULL, NULL);
+		CreateWindow(TEXT("STATIC"), TEXT("RED"), WS_CHILD | WS_VISIBLE, 270, 200, 300, 25, hwnd, NULL, NULL, NULL);
+		h16 = CreateWindowEx(WS_EX_CLIENTEDGE, TEXT("EDIT"), TEXT("0"), WS_CHILD | WS_VISIBLE, 400, 200, 80, 25, hwnd, AutoCast<int>(19), NULL, NULL);
+		CreateWindow(TEXT("STATIC"), TEXT("GREEN"), WS_CHILD | WS_VISIBLE, 270, 240, 300, 25, hwnd, NULL, NULL, NULL);
+		h18 = CreateWindowEx(WS_EX_CLIENTEDGE, TEXT("EDIT"), TEXT("0"), WS_CHILD | WS_VISIBLE, 400, 240, 80, 25, hwnd, AutoCast<int>(20), NULL, NULL);
+		CreateWindow(TEXT("STATIC"), TEXT("BLUE"), WS_CHILD | WS_VISIBLE, 270, 285, 300, 25, hwnd, NULL, NULL, NULL);
+		h20 = CreateWindowEx(WS_EX_CLIENTEDGE, TEXT("EDIT"), TEXT("0"), WS_CHILD | WS_VISIBLE, 400, 285, 80, 25, hwnd, AutoCast<int>(21), NULL, NULL);
+
+		CreateWindow(TEXT("button"), TEXT("RESET"), WS_CHILD | WS_VISIBLE, 280, 400, 100, 35, hwnd, (HMENU)10003, NULL, NULL);
+		CreateWindow(TEXT("button"), TEXT("APPLY"), WS_CHILD | WS_VISIBLE, 400, 400, 100, 35, hwnd, (HMENU)10002, NULL, NULL);
 
 		GUI_CREATEFONT(30, 12, "Arial", h11); GUI_CREATEFONT(30, 12, "Arial", h14); GUI_CREATEFONT(30, 12, "Arial", h1);
 		GUI_CREATEFONT(30, 12, "Arial", h2); GUI_CREATEFONT(30, 12, "Arial", h3); GUI_CREATEFONT(30, 12, "Arial", h4);
@@ -89,17 +93,49 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
 		switch (LOWORD(wParam))
 		{
-		case 1:  if (IsDlgButtonChecked(hwnd, 1) == BST_CHECKED) while (true) { SetWindowBlur(taskbar, AccentState::ACCENT_ENABLE_GRADIENT); WindowMessageLoop(); }  break;
-		case 2: if (IsDlgButtonChecked(hwnd, 2) == BST_CHECKED) while (true) { SetWindowBlur(taskbar, AccentState::ACCENT_ENABLE_TRANSPARENTGRADIENT); WindowMessageLoop(); } break;
-		case 3: if (IsDlgButtonChecked(hwnd, 3) == BST_CHECKED) while (true) { SetWindowBlur(taskbar, AccentState::ACCENT_ENABLE_BLURBEHIND); WindowMessageLoop(); } break;
-		case 6: if (IsDlgButtonChecked(hwnd, 6) == BST_CHECKED) while (true) { SetWindowBlur(taskbar, AccentState::ACCENT_INVALID_STATE); WindowMessageLoop(); } break;
-		case 5: if (IsDlgButtonChecked(hwnd, 5) == BST_CHECKED) while (true) { SetWindowBlur(taskbar, AccentState::ACCENT_DISABLED); WindowMessageLoop(); } break;
-		case 22: if (IsDlgButtonChecked(hwnd, 22) == BN_CLICKED) while (true) { SetWindowBlur(taskbar, AccentState::ACCENT_ENABLE_GRADIENT, 2, RGB(atoi(GetWinText(h16).c_str()), atoi(GetWinText(h18).c_str()), atoi(GetWinText(h20).c_str()))); WindowMessageLoop(); } break;
-		case 102: if (IsDlgButtonChecked(hwnd, 102) == BST_CHECKED) while (true) { SetWindowBlur(startmenu, AccentState::ACCENT_DISABLED, 0); WindowMessageLoop(); }  break;
-		case 103: if (IsDlgButtonChecked(hwnd, 103) == BST_CHECKED) while (true) { SetWindowBlur(startmenu, AccentState::ACCENT_ENABLE_BLURBEHIND, 0); WindowMessageLoop(); } break;
-		case 40: if (IsDlgButtonChecked(hwnd, 40) == BN_CLICKED) CenterTaskBar(0, true); break;
-		case 32: if (IsDlgButtonChecked(hwnd, 32) == BN_CLICKED) while (true) { CenterTaskBar(atoi(GetWinText(h9).c_str())); WindowMessageLoop(); } break;
+		case 10002: 
+		{
+			if (IsDlgButtonChecked(hwnd, 10002) == BN_CLICKED)
+			{
+				while (true)
+				{
+					if (IsDlgButtonChecked(hwnd, 1) == BST_CHECKED) SetWindowBlur(taskbar, AccentState::ACCENT_ENABLE_GRADIENT);		
+					if (IsDlgButtonChecked(hwnd, 2) == BST_CHECKED) SetWindowBlur(taskbar, AccentState::ACCENT_ENABLE_TRANSPARENTGRADIENT);		
+					if (IsDlgButtonChecked(hwnd, 3) == BST_CHECKED) SetWindowBlur(taskbar, AccentState::ACCENT_ENABLE_BLURBEHIND);
+					if (IsDlgButtonChecked(hwnd, 6) == BST_CHECKED) SetWindowBlur(taskbar, AccentState::ACCENT_INVALID_STATE);				
+					if (IsDlgButtonChecked(hwnd, 5) == BST_CHECKED) SetWindowBlur(taskbar, AccentState::ACCENT_DISABLED);
+			
+					if (atoi(GetWinText(h16).c_str()) != 0 || atoi(GetWinText(h18).c_str()) != 0 || atoi(GetWinText(h20).c_str()) != 0)
+						SetTaskBarColor(taskbar, RGB(atoi(GetWinText(h16).c_str()), atoi(GetWinText(h18).c_str()), atoi(GetWinText(h20).c_str())), NULL);
+
+					if (IsDlgButtonChecked(hwnd, 102) == BST_CHECKED) SetWindowBlur(startmenu, AccentState::ACCENT_DISABLED);
+					if (IsDlgButtonChecked(hwnd, 103) == BST_CHECKED) SetWindowBlur(startmenu, AccentState::ACCENT_ENABLE_BLURBEHIND);
+
+					CenterTaskBar(atoi(GetWinText(h9).c_str()));
+
+					Sleep(10);
+					WindowMessageLoop();
+				}
+			}
+
+			break;
+		}
 		
+		case 10003: 
+		{
+			if (IsDlgButtonChecked(hwnd, 10003) == BN_CLICKED)
+			{
+				while (true)
+				{
+					Sleep(10);
+					CenterTaskBar(0, true);
+					WindowMessageLoop(); 
+				}
+			}
+
+			break;
+		}
+
 		case ID_ABOUT:
 			MessageBoxA(NULL, "About", "", MB_OK);
 			break;
@@ -130,6 +166,25 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			}
 			break;
 		default: return TRUE;
+		}
+
+		break;
+	}
+	case WM_NOTIFY: 
+	{
+		LPNMHDR some_item = AutoCast<LPARAM>(lParam);
+
+		if (some_item->idFrom == 10002 || some_item->idFrom == 10003 && some_item->code == -12)
+		{
+			LPNMCUSTOMDRAW item = AutoCast<LPNMHDR>(some_item);
+
+			FillRect(item->hdc, &item->rc, CreateSolidBrush(RGB(220, 220, 220)));
+
+			if (item->uItemState & CDIS_HOT)
+				FillRect(item->hdc, &item->rc, CreateSolidBrush(RGB(210, 210, 210)));	
+
+			if (item->uItemState & CDIS_SELECTED)
+				FillRect(item->hdc, &item->rc, CreateSolidBrush(RGB(200, 200, 200)));		
 		}
 
 		break;
@@ -168,12 +223,15 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-int WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int)
+// using 'WinMain' to hide the console 
+int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int)
 {
-	WNDCLASSW ws { NULL, WndProc, NULL, NULL, hInstance, (HICON)LoadImage(NULL, "icon.ico", IMAGE_ICON, 0, 0, LR_LOADFROMFILE | LR_DEFAULTSIZE | LR_SHARED), NULL, CreateSolidBrush(RGB(240, 240, 240)), NULL, L"BetterTaskBarWClass" };
+	WNDCLASSW ws{ NULL, WndProc, NULL, NULL, hInstance, LoadIcon(hInstance, MAKEINTRESOURCE(101)), NULL, CreateSolidBrush(RGB(240, 240, 240)), NULL, L"BetterTaskBarWClass" };
 	RegisterClassW(&ws);
-	HWND win = CreateWindowExW(WS_EX_LAYERED, ws.lpszClassName, L"TaskBar Congregation", WS_SYSMENU | WS_VISIBLE, 500, 150, 550, 470, NULL, NULL, NULL, NULL);
+	HWND win = CreateWindowExW(WS_EX_LAYERED, ws.lpszClassName, L"TaskBar Congregation", WS_SYSMENU | WS_VISIBLE, 500, 150, 550, 500, NULL, NULL, NULL, NULL);
 	SetLayeredWindowAttributes(win, RGB(0, 0, 1), 200, 2);
+
+	SetProcessDpiAwareness(PROCESS_SYSTEM_DPI_AWARE);
 
 	BOOL Ret;
 	MSG msg;
@@ -186,6 +244,35 @@ int WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int)
 		DispatchMessageW(&msg);
 	}
 
-	return AutoCast(msg.wParam).ToAuto<int>();
+	return AutoCast<WPARAM>(msg.wParam).ToAuto<int>();
 }
 
+
+
+
+
+
+
+//int main() noexcept
+//{
+//	WNDCLASSW ws{ NULL, WndProc, NULL, NULL, GetModuleHandle(NULL), LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(101)), NULL, CreateSolidBrush(RGB(240, 240, 240)), NULL, L"BetterTaskBarWClass" };
+//	RegisterClassW(&ws);
+//	HWND win = CreateWindowExW(WS_EX_LAYERED, ws.lpszClassName, L"TaskBar Congregation", WS_SYSMENU | WS_VISIBLE, 500, 150, 550, 500, NULL, NULL, NULL, NULL);
+//	SetLayeredWindowAttributes(win, RGB(0, 0, 1), 200, 2);
+//
+//	SetProcessDpiAwareness(PROCESS_SYSTEM_DPI_AWARE);
+//
+//	BOOL Ret;
+//	MSG msg;
+//
+//	while ((Ret = GetMessageW(&msg, 0, 0, 0)))
+//	{
+//		if (Ret == -1)
+//			return -1;
+//
+//		TranslateMessage(&msg);
+//		DispatchMessageW(&msg);
+//	}
+//
+//	return AutoCast<WPARAM>(msg.wParam).ToAuto<int>();
+//}

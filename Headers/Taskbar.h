@@ -26,7 +26,7 @@ void SetWindowBlur(HWND hWnd, AccentState AccentState, int Flags = 2, int color 
 		struct WINCOMPATTRDATA { int nAttribute; void* pData; unsigned long ulDataSize; };
 
 		typedef BOOL(WINAPI* pSetWindowCompositionAttribute)(HWND, WINCOMPATTRDATA*);
-		static pSetWindowCompositionAttribute SetWindowCompositionAttribute = AutoCast(GetProcAddress(hlib, "SetWindowCompositionAttribute"));
+		static pSetWindowCompositionAttribute SetWindowCompositionAttribute = AutoCast<FARPROC>(GetProcAddress(hlib, "SetWindowCompositionAttribute"));
 
 		if (SetWindowCompositionAttribute)
 		{
@@ -41,6 +41,8 @@ void SetWindowBlur(HWND hWnd, AccentState AccentState, int Flags = 2, int color 
 
 void CenterTaskBar(int offset, bool def = false)
 {
+	//const int result = SetProcessDpiAwareness(PROCESS_PER_MONITOR_DPI_AWARE);
+
 	HWND taskbar = FindWindowA("Shell_TrayWnd", NULL);
 	HWND panel = FindWindowExA(taskbar, NULL, "ReBarWindow32", NULL);
 	HWND panel2 = FindWindowExA(panel, NULL, "MSTaskSwWClass", NULL);
@@ -53,10 +55,10 @@ void CenterTaskBar(int offset, bool def = false)
 	CComPtr<IUIAutomationElement> firstchild{};
 	CComPtr<IUIAutomationElement> lastchild{};
 	CComPtr<IUIAutomationElement> taskList{};
-	
+
 	HRESULT hr;
 	hr = ::CoInitialize(NULL);
-	hr = ::CoCreateInstance(__uuidof(CUIAutomation), nullptr, CLSCTX_INPROC_SERVER, __uuidof(IUIAutomation), AutoCast(&UI));
+	hr = ::CoCreateInstance(__uuidof(CUIAutomation), nullptr, CLSCTX_INPROC_SERVER, __uuidof(IUIAutomation), AutoCast<LPVOID>(&UI));
 
 	UI->ElementFromHandle(tasklist, &taskList);
 	UI->get_ControlViewWalker(&TreeWalker);
@@ -73,7 +75,8 @@ void CenterTaskBar(int offset, bool def = false)
 	GetClientRect(taskbar, &rc6);
 	GetWindowRect(panel, &rc7);
 
-	const long Center = (rc5.right - rc5.left) - (((rc3.left - rc2.left)) / 2) - (rc4.left + ((rc5.left - rc.left) - ((rc5.left - rc2.left))));
+	const long offset1 = rc2.right - rc2.left;
+	const long Center = (rc5.right - rc5.left) - ((((rc3.left - rc2.left)) + offset1) / 2) - (rc4.left + (((rc5.left - rc.left) + offset1) - ((rc5.left - rc2.left))));
 
 	SafeRelease(UI);
 	SafeRelease(TreeWalker);
@@ -88,6 +91,7 @@ void CenterTaskBar(int offset, bool def = false)
 	else
 		::SetWindowPos(tasklist, nullptr, 0, def ? offset : Center + offset, 0, 0, SWP_NOZORDER | SWP_NOSIZE | SWP_ASYNCWINDOWPOS);
 }
+	
 
 void SetTaskBarColor(HWND hWnd, COLORREF color, BYTE Alpha) noexcept
 {

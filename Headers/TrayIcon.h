@@ -21,7 +21,7 @@ BOOL ShowPopupMenu(HWND hWnd, bool checked) noexcept
 	InsertMenuA(hPop, 5, MF_BYPOSITION | MF_STRING, ID_EXIT, "Exit");
 
 	//SetMenuDefaultItem(hPop, ID_ABOUT, FALSE);
-	SendMessage(hWnd, WM_INITMENUPOPUP, AutoCast(hPop).ToAuto<WPARAM>(), 0);
+	SendMessage(hWnd, WM_INITMENUPOPUP, AutoCast<HMENU>(hPop).ToAuto<WPARAM>(), 0);
 
 	POINT pt;
 	GetCursorPos(&pt);
@@ -31,6 +31,22 @@ BOOL ShowPopupMenu(HWND hWnd, bool checked) noexcept
 	DestroyMenu(hPop);
 
 	return 0;
+}
+
+HICON SetIcons(HWND hwnd, const WCHAR* iconpath) noexcept 
+{
+	HANDLE hIcon = LoadImage(0, iconpath, IMAGE_ICON, 0, 0, LR_DEFAULTSIZE | LR_LOADFROMFILE | LR_SHARED);
+
+	if (hIcon) 
+	{
+		SendMessage(hwnd, WM_SETICON, ICON_SMALL, AutoCast(hIcon).ToAuto<LPARAM>());
+		SendMessage(hwnd, WM_SETICON, ICON_BIG, AutoCast(hIcon).ToAuto<LPARAM>());
+
+		SendMessage(GetWindow(hwnd, GW_OWNER), WM_SETICON, ICON_SMALL, AutoCast(hIcon).ToAuto<LPARAM>());
+		SendMessage(GetWindow(hwnd, GW_OWNER), WM_SETICON, ICON_BIG, AutoCast(hIcon).ToAuto<LPARAM>());
+	}
+
+	return AutoCast(hIcon);
 }
 
 void RemoveTrayIcon(HWND hWnd, UINT uID) noexcept
@@ -48,8 +64,8 @@ void AddTrayIcon(HWND hWnd, UINT uID, UINT uCallbackMsg, UINT uIcon) noexcept
 	nid.uID = uID;
 	nid.uFlags = NIF_ICON | NIF_MESSAGE | NIF_TIP;
 	nid.uCallbackMessage = uCallbackMsg;
-	nid.hIcon = static_cast<HICON>(LoadImage(NULL, "icon.ico", IMAGE_ICON, 0, 0, LR_LOADFROMFILE | LR_DEFAULTSIZE | LR_SHARED));
-	strncpy_s(nid.szTip, "Tool Tip", 128);
+	nid.hIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(101)); //SetIcons(hWnd, L"icon.ico");
+	strncpy_s(nid.szTip, "Better TaskBar", 128);
 	Shell_NotifyIconA(NIM_ADD, &nid);
 }
 
