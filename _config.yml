@@ -1,4 +1,6 @@
 theme: jekyll-theme-cayman
 show_downloads: true
 title: Better TaskBar
-description: 
+
+github:
+  zip_url: http://example.com/
