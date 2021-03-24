@@ -14,9 +14,8 @@
 
 ## Downloads
 - FREE | Via The releases : <a href="https://github.com/Duui3111/BetterTaskBar/releases">https://github.com/Duui3111/BetterTaskBar/releases</a>
-- FREE | Build It Your Self : https://github.com/Duui3111/BetterTaskBar/archive/refs/heads/main.zip
+- FREE | Build It Your Self : <a href="https://github.com/Duui3111/BetterTaskBar/archive/refs/heads/main.zip">https://github.com/Duui3111/BetterTaskBar/archive/refs/heads/main.zip</a>
     
-&nbsp;
 
 ## Contributing
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
