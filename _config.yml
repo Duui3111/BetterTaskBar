@@ -1,6 +1,1 @@
-theme: jekyll-theme-cayman
-show_downloads: true
-title: Better TaskBar
-minimal_mistakes_skin: "dark"
-github:
-  zip_url: http://example.com/
+remote_theme: tuur29/pages-themes-cayman
