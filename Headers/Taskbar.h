@@ -39,10 +39,8 @@ void SetWindowBlur(HWND hWnd, AccentState AccentState, int Flags = 2, int color 
 	}
 }
 
-void CenterTaskBar(int offset, bool def = false)
+int CenterTaskBar(int offset, bool def = false, bool justret = false)
 {
-	//const int result = SetProcessDpiAwareness(PROCESS_PER_MONITOR_DPI_AWARE);
-
 	HWND taskbar = FindWindowA("Shell_TrayWnd", NULL);
 	HWND panel = FindWindowExA(taskbar, NULL, "ReBarWindow32", NULL);
 	HWND panel2 = FindWindowExA(panel, NULL, "MSTaskSwWClass", NULL);
@@ -86,13 +84,17 @@ void CenterTaskBar(int offset, bool def = false)
 
 	::CoUninitialize();
 
-	if (rc6.right > rc6.bottom)
-		::SetWindowPos(tasklist, nullptr, def ? offset : Center + offset, 0, 0, 0, SWP_NOZORDER | SWP_NOSIZE | SWP_ASYNCWINDOWPOS);
-	else
-		::SetWindowPos(tasklist, nullptr, 0, def ? offset : Center + offset, 0, 0, SWP_NOZORDER | SWP_NOSIZE | SWP_ASYNCWINDOWPOS);
+	if (justret != true)
+	{
+		if (rc6.right > rc6.bottom)
+			::SetWindowPos(tasklist, nullptr, def ? offset : Center + offset, 0, 0, 0, SWP_NOZORDER | SWP_NOSIZE | SWP_ASYNCWINDOWPOS);
+		else
+			::SetWindowPos(tasklist, nullptr, 0, def ? offset : Center + offset, 0, 0, SWP_NOZORDER | SWP_NOSIZE | SWP_ASYNCWINDOWPOS);
+	}
+
+	return Center + offset;
 }
 	
-
 void SetTaskBarColor(HWND hWnd, COLORREF color, BYTE Alpha) noexcept
 {
 	SetWindowBlur(hWnd, AccentState::ACCENT_ENABLE_GRADIENT, 0, color);

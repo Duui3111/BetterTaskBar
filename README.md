@@ -5,9 +5,9 @@
 
 ----
 ## Features
-* Animations(beta)
-* calculates Center of taskbar
-* Vertical orientation support
+* Taskbar Animations
+* Calculates Center of Taskbar
+* Vertical Orientation Support
 * Change Taskbar Style, Color and Offset
 * Change StartMeu Style 
 * Pick to Start On Boot
