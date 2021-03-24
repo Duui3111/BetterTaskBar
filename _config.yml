@@ -1,7 +1,7 @@
 remote_theme: tuur29/pages-themes-cayman
 
 show_downloads: true
-darkmode: true
+darkmode: false
 hide_first_title: false 
 colors:
     gradient_left: "#155799"
