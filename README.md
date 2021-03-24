@@ -12,6 +12,11 @@
 * Change StartMeu Style 
 * Pick to Start On Boot
 
+## Downloads
+- FREE | Via The releases : https://github.com/Duui3111/BetterTaskBar/releases
+- FREE | Build It Your Self : https://github.com/Duui3111/BetterTaskBar/archive/refs/heads/main.zip
+    
+&nbsp;
 
 ## Contributing
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
