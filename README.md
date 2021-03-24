@@ -13,7 +13,7 @@
 * Pick to Start On Boot
 
 ## Downloads
-- FREE | Via The releases : https://github.com/Duui3111/BetterTaskBar/releases
+- FREE | Via The releases : <a href="https://github.com/Duui3111/BetterTaskBar/releases"/>https://github.com/Duui3111/BetterTaskBar/releases</a>
 - FREE | Build It Your Self : https://github.com/Duui3111/BetterTaskBar/archive/refs/heads/main.zip
     
 &nbsp;
