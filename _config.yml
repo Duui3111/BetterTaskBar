@@ -13,8 +13,8 @@ colors:
 buttons:
       zip_url: http://example.com/
       zip_title: Title
-      zip_hide: true
+      zip_hide: false
       tar_url: http://example.com/
       tar_title: Title
-      tar_hide: true
-      github_hide: true # hides "View on Github"
+      tar_hide: false
+      github_hide: false
