@@ -4,7 +4,7 @@
 <br/>
 
 ----
-##About
+## About
 <img src="https://raw.githubusercontent.com/Duui3111/BetterTaskBar/main/Resources/taskbars2.PNG" />
 
 ## Features
