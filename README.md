@@ -4,6 +4,9 @@
 <br/>
 
 ----
+##About
+<img src="https://raw.githubusercontent.com/Duui3111/BetterTaskBar/main/Resources/taskbars2.png" />
+
 ## Features
 * Taskbar Animations
 * Calculates Center of Taskbar
